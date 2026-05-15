@@ -107,7 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Obstacle
   moveSpeed: 15
   rotationSpeed: {x: 20, y: 30, z: 10}
-  destroyZ: -100
+  destroyZ: -50
 --- !u!135 &7573889170701130685
 SphereCollider:
   m_ObjectHideFlags: 0

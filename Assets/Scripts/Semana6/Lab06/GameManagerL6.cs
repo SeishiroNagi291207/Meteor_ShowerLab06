@@ -1,26 +1,33 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManagerL6 : MonoBehaviour
 {
     public static GameManagerL6 instance;
 
-    [Header("Player")]
+    [Header("Lives")]
     public int lives = 3;
+
+    [Header("Hearts")]
+    public Image[] hearts;
 
     [Header("Score")]
     public float score;
 
-    [Header("UI")]
     public TMP_Text scoreText;
-    public TMP_Text livesText;
+
+    [Header("Game Over")]
     public GameObject gameOverText;
+
+    public GameObject restartButton;
 
     private bool gameEnded = false;
 
     void Awake()
     {
-        instance = this;
+        instance = this; 
     }
 
     void Update()
@@ -32,18 +39,25 @@ public class GameManagerL6 : MonoBehaviour
 
         scoreText.text =
             "Score: " + Mathf.FloorToInt(score);
-
-        livesText.text =
-            "Lives: " + lives;
     }
 
     public void LoseLife()
     {
         lives--;
 
+        UpdateHearts();
+
         if (lives <= 0)
         {
             GameOver();
+        }
+    }
+
+    void UpdateHearts()
+    {
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            hearts[i].enabled = i < lives;
         }
     }
 
@@ -53,6 +67,15 @@ public class GameManagerL6 : MonoBehaviour
 
         gameOverText.SetActive(true);
 
+        restartButton.SetActive(true);
+
         Time.timeScale = 0;
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
