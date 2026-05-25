@@ -2,17 +2,14 @@ using UnityEngine;
 
 public class Exercise01_MRU : MonoBehaviour
 {
-    public float speed = 8f;
-    private float objetivoX = 40f;
-    void Start()
-    {
-        
-    }
+    public float velocidad = 8f;
+    private float VectorX = 40f;
     void Update()
     {
-        if (transform.position.x < objetivoX)
+        // Mientras no llegue a x = 40
+        if (transform.position.x < VectorX)
         {
-            transform.Translate(Vector3.back * speed * Time.deltaTime);
+            transform.Translate(Vector3.right * velocidad * Time.deltaTime);
         }
     }
 }
